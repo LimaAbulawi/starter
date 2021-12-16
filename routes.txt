@@ -1,0 +1,44 @@
+Route::get('/test1', function () {
+    return 'welcome';
+});
+Route::get('/aaaaa/{id}', function ($id) {
+    return $id;
+})->name('a');
+
+Route::get('/bbbbb/{id?}', function () {
+    return  'welcome';
+})-> name('b');
+
+Route::namespace('Front')->group(function(){
+
+route:: get('/user','UserController@user');
+
+});
+
+Route::group(['prefix'=>'users', 'middleware'=>'auth'],function(){
+
+    route::get('/',function(){
+        return 'prefix';
+    });
+});
+
+Route::group(['namespace'=>'Front', 'prefix'=>'Front'],function(){
+
+    route::get('/first','FirstController@first');
+    route::get('/second','FirstController@sec');
+});
+
+Route::get('login', function(){
+    return 'must be login';
+})->name('login');
+
+route::resource('news','NewsController');
+
+
+
+Route::get('/landing', function(){
+return view('landing');
+});
+Route::get('/about', function(){
+    return view('about');
+    });
